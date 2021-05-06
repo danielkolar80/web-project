@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3a9abcd05f59269959edf2e4f75730546bc32c92',
+    'reference' => '0b2bb0d04ffccf1c02026399af6d79b3f550e4be',
     'name' => 'nette/web-project',
   ),
   'versions' => 
@@ -58,12 +58,12 @@
     ),
     'nette/database' => 
     array (
-      'pretty_version' => 'v3.1.1',
-      'version' => '3.1.1.0',
+      'pretty_version' => 'v3.1.2',
+      'version' => '3.1.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '17bc9b2b5a5cd57ab089bc1a5982bc6c3b3790e3',
+      'reference' => '8caf46857ea50784734e0d53e4accf3833d236ff',
     ),
     'nette/di' => 
     array (
@@ -189,7 +189,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3a9abcd05f59269959edf2e4f75730546bc32c92',
+      'reference' => '0b2bb0d04ffccf1c02026399af6d79b3f550e4be',
     ),
     'symfony/thanks' => 
     array (
@@ -202,12 +202,12 @@
     ),
     'tracy/tracy' => 
     array (
-      'pretty_version' => 'v2.8.3',
-      'version' => '2.8.3.0',
+      'pretty_version' => 'v2.8.4',
+      'version' => '2.8.4.0',
       'aliases' => 
       array (
       ),
-      'reference' => '342674bbf72365e8456de9855a8cd839ca695933',
+      'reference' => 'cb7d3dcd9469aa2aa6722edf6bee2d5d75188079',
     ),
   ),
 );
