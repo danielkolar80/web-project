@@ -109,6 +109,16 @@ final class Exposer
 	}
 
 
+	public static function exposeEnum(\UnitEnum $enum, Value $value, Describer $describer): void
+	{
+		$value->value = get_class($enum) . '::' . $enum->name;
+		if ($enum instanceof \BackedEnum) {
+			$describer->addPropertyTo($value, 'value', $enum->value);
+			$value->collapsed = true;
+		}
+	}
+
+
 	public static function exposeArrayObject(\ArrayObject $obj, Value $value, Describer $describer): void
 	{
 		$flags = $obj->getFlags();
@@ -178,5 +188,28 @@ final class Exposer
 			$describer->addPropertyTo($value, $k, $v, $type, $refId, $decl);
 		}
 		$value->value = $class . ' (Incomplete Class)';
+	}
+
+
+	public static function exposeDsCollection(
+		\Ds\Collection $obj,
+		Value $value,
+		Describer $describer
+	): void {
+		foreach ($obj as $k => $v) {
+			$describer->addPropertyTo($value, (string) $k, $v, Value::PROP_VIRTUAL);
+		}
+	}
+
+
+	public static function exposeDsMap(
+		\Ds\Map $obj,
+		Value $value,
+		Describer $describer
+	): void {
+		$i = 0;
+		foreach ($obj as $k => $v) {
+			$describer->addPropertyTo($value, (string) $i++, new \Ds\Pair($k, $v), Value::PROP_VIRTUAL);
+		}
 	}
 }
