@@ -564,17 +564,17 @@
         },
         {
             "name": "nette/finder",
-            "version": "v2.5.2",
-            "version_normalized": "2.5.2.0",
+            "version": "v2.5.3",
+            "version_normalized": "2.5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/finder.git",
-                "reference": "4ad2c298eb8c687dd0e74ae84206a4186eeaed50"
+                "reference": "64dc25b7929b731e72a1bc84a9e57727f5d5d3e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/finder/zipball/4ad2c298eb8c687dd0e74ae84206a4186eeaed50",
-                "reference": "4ad2c298eb8c687dd0e74ae84206a4186eeaed50",
+                "url": "https://api.github.com/repos/nette/finder/zipball/64dc25b7929b731e72a1bc84a9e57727f5d5d3e8",
+                "reference": "64dc25b7929b731e72a1bc84a9e57727f5d5d3e8",
                 "shasum": ""
             },
             "require": {
@@ -589,7 +589,7 @@
                 "phpstan/phpstan": "^0.12",
                 "tracy/tracy": "^2.3"
             },
-            "time": "2020-01-03T20:35:40+00:00",
+            "time": "2021-12-12T17:43:24+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -605,8 +605,8 @@
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
+                "GPL-2.0-only",
+                "GPL-3.0-only"
             ],
             "authors": [
                 {
@@ -628,7 +628,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/finder/issues",
-                "source": "https://github.com/nette/finder/tree/v2.5.2"
+                "source": "https://github.com/nette/finder/tree/v2.5.3"
             },
             "install-path": "../nette/finder"
         },
@@ -712,17 +712,17 @@
         },
         {
             "name": "nette/http",
-            "version": "v3.1.4",
-            "version_normalized": "3.1.4.0",
+            "version": "v3.1.5",
+            "version_normalized": "3.1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nette/http.git",
-                "reference": "f37bb201546003e4fad877f47643c598dc54dab9"
+                "reference": "8146c2f2a262691a7139f9c56007961dcc5c1f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nette/http/zipball/f37bb201546003e4fad877f47643c598dc54dab9",
-                "reference": "f37bb201546003e4fad877f47643c598dc54dab9",
+                "url": "https://api.github.com/repos/nette/http/zipball/8146c2f2a262691a7139f9c56007961dcc5c1f42",
+                "reference": "8146c2f2a262691a7139f9c56007961dcc5c1f42",
                 "shasum": ""
             },
             "require": {
@@ -743,7 +743,7 @@
             "suggest": {
                 "ext-fileinfo": "to detect type of uploaded files"
             },
-            "time": "2021-11-24T10:21:40+00:00",
+            "time": "2021-11-29T18:56:42+00:00",
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -787,7 +787,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nette/http/issues",
-                "source": "https://github.com/nette/http/tree/v3.1.4"
+                "source": "https://github.com/nette/http/tree/v3.1.5"
             },
             "install-path": "../nette/http"
         },
