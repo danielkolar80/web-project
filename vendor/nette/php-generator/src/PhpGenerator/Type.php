@@ -16,22 +16,42 @@ namespace Nette\PhpGenerator;
 class Type
 {
 	public const
-		STRING = 'string',
-		INT = 'int',
-		FLOAT = 'float',
-		BOOL = 'bool',
-		ARRAY = 'array',
-		OBJECT = 'object',
-		CALLABLE = 'callable',
-		ITERABLE = 'iterable',
-		VOID = 'void',
-		NEVER = 'never',
-		MIXED = 'mixed',
-		FALSE = 'false',
-		NULL = 'null',
-		SELF = 'self',
-		PARENT = 'parent',
-		STATIC = 'static';
+		String = 'string',
+		Int = 'int',
+		Float = 'float',
+		Bool = 'bool',
+		Array = 'array',
+		Object = 'object',
+		Callable = 'callable',
+		Iterable = 'iterable',
+		Void = 'void',
+		Never = 'never',
+		Mixed = 'mixed',
+		True = 'true',
+		False = 'false',
+		Null = 'null',
+		Self = 'self',
+		Parent = 'parent',
+		Static = 'static';
+
+	/** @deprecated */
+	public const
+		STRING = self::String,
+		INT = self::Int,
+		FLOAT = self::Float,
+		BOOL = self::Bool,
+		ARRAY = self::Array,
+		OBJECT = self::Object,
+		CALLABLE = self::Callable,
+		ITERABLE = self::Iterable,
+		VOID = self::Void,
+		NEVER = self::Never,
+		MIXED = self::Mixed,
+		FALSE = self::False,
+		NULL = self::Null,
+		SELF = self::Self,
+		PARENT = self::Parent,
+		STATIC = self::Static;
 
 
 	public static function nullable(string $type, bool $state = true): string
@@ -52,22 +72,10 @@ class Type
 	}
 
 
-	public static function getType($value): ?string
+	/** @deprecated  use get_debug_type() */
+	public static function getType(mixed $value): ?string
 	{
-		if (is_object($value)) {
-			return get_class($value);
-		} elseif (is_int($value)) {
-			return self::INT;
-		} elseif (is_float($value)) {
-			return self::FLOAT;
-		} elseif (is_string($value)) {
-			return self::STRING;
-		} elseif (is_bool($value)) {
-			return self::BOOL;
-		} elseif (is_array($value)) {
-			return self::ARRAY;
-		} else {
-			return null;
-		}
+		trigger_error(__METHOD__ . '() is deprecated, use PHP function get_debug_type()', E_USER_DEPRECATED);
+		return is_resource($value) ? null : get_debug_type($value);
 	}
 }

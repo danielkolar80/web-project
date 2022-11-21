@@ -85,7 +85,8 @@ final class DevelopmentStrategy
 		string $file,
 		int $line,
 		array $context = null
-	): void {
+	): void
+	{
 		if (function_exists('ini_set')) {
 			$oldDisplay = ini_set('display_errors', '1');
 		}
@@ -95,8 +96,8 @@ final class DevelopmentStrategy
 			&& !isset($_GET['_tracy_skip_error'])
 		) {
 			$e = new ErrorException($message, 0, $severity, $file, $line);
-			$e->context = $context;
-			$e->skippable = true;
+			@$e->context = $context; // dynamic properties are deprecated since PHP 8.2
+			@$e->skippable = true;
 			Debugger::exceptionHandler($e);
 			exit(255);
 		}
@@ -133,10 +134,6 @@ final class DevelopmentStrategy
 	{
 		if (function_exists('ini_set')) {
 			ini_set('display_errors', '1');
-		}
-
-		if (preg_match('#^Content-Length:#im', implode("\n", headers_list()))) {
-			Debugger::log(new \LogicException('Tracy cannot display the Bar because the Content-Length header is being sent'), Debugger::EXCEPTION);
 		}
 
 		$this->bar->render($this->defer);

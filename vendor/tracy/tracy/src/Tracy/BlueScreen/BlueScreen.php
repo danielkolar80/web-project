@@ -317,7 +317,8 @@ class BlueScreen
 		int $lines = 15,
 		bool $php = true,
 		int $column = 0
-	): ?string {
+	): ?string
+	{
 		$source = @file_get_contents($file); // @ file may not exist
 		if ($source === false) {
 			return null;
@@ -431,8 +432,8 @@ class BlueScreen
 			'color: ' . ini_get('highlight.html') => '1;35',
 			'color: ' . ini_get('highlight.keyword') => '1;37',
 			'color: ' . ini_get('highlight.string') => '1;32',
-			'line' => '1;30',
-			'highlight' => "1;37m\e[41",
+			'tracy-line' => '1;30',
+			'tracy-line-highlight' => "1;37m\e[41",
 		];
 
 		$stack = ['0'];
@@ -609,8 +610,8 @@ class BlueScreen
 			}
 		};
 
-		foreach ($this->fibers as $obj => $foo) {
-			$add($obj);
+		foreach ($this->fibers as $k => $v) {
+			$add($this->fibers instanceof \WeakMap ? $k : $v);
 		}
 
 		if (PHP_VERSION_ID >= 80000) {

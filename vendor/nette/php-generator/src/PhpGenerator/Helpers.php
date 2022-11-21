@@ -54,15 +54,17 @@ final class Helpers
 
 
 	/** @deprecated  use (new Nette\PhpGenerator\Dumper)->dump() */
-	public static function dump($var): string
+	public static function dump(mixed $var): string
 	{
+		trigger_error(__METHOD__ . '() is deprecated, use (new Nette\PhpGenerator\Dumper)->dump().', E_USER_DEPRECATED);
 		return (new Dumper)->dump($var);
 	}
 
 
 	/** @deprecated  use (new Nette\PhpGenerator\Dumper)->format() */
-	public static function format(string $statement, ...$args): string
+	public static function format(string $statement, mixed ...$args): string
 	{
+		trigger_error(__METHOD__ . '() is deprecated, use (new Nette\PhpGenerator\Dumper)->format().', E_USER_DEPRECATED);
 		return (new Dumper)->format($statement, ...$args);
 	}
 
@@ -70,20 +72,22 @@ final class Helpers
 	/** @deprecated  use (new Nette\PhpGenerator\Dumper)->format() */
 	public static function formatArgs(string $statement, array $args): string
 	{
+		trigger_error(__METHOD__ . '() is deprecated, use (new Nette\PhpGenerator\Dumper)->format().', E_USER_DEPRECATED);
 		return (new Dumper)->format($statement, ...$args);
 	}
 
 
-	public static function formatDocComment(string $content): string
+	public static function formatDocComment(string $content, bool $forceMultiLine = false): string
 	{
 		$s = trim($content);
 		$s = str_replace('*/', '* /', $s);
 		if ($s === '') {
 			return '';
-		} elseif (strpos($content, "\n") === false) {
-			return "/** $s */\n";
+		} elseif ($forceMultiLine || str_contains($content, "\n")) {
+			$s = str_replace("\n", "\n * ", "/**\n$s") . "\n */";
+			return Nette\Utils\Strings::normalize($s) . "\n";
 		} else {
-			return str_replace("\n", "\n * ", "/**\n$s") . "\n */\n";
+			return "/** $s */\n";
 		}
 	}
 
@@ -121,13 +125,13 @@ final class Helpers
 	}
 
 
-	public static function isIdentifier($value): bool
+	public static function isIdentifier(mixed $value): bool
 	{
 		return is_string($value) && preg_match('#^' . self::ReIdentifier . '$#D', $value);
 	}
 
 
-	public static function isNamespaceIdentifier($value, bool $allowLeadingSlash = false): bool
+	public static function isNamespaceIdentifier(mixed $value, bool $allowLeadingSlash = false): bool
 	{
 		$re = '#^' . ($allowLeadingSlash ? '\\\\?' : '') . self::ReIdentifier . '(\\\\' . self::ReIdentifier . ')*$#D';
 		return is_string($value) && preg_match($re, $value);
@@ -154,7 +158,10 @@ final class Helpers
 	}
 
 
-	/** @internal */
+	/**
+	 * @param  mixed[]  $props
+	 * @internal
+	 */
 	public static function createObject(string $class, array $props): object
 	{
 		return Dumper::createObject($class, $props);
@@ -167,10 +174,14 @@ final class Helpers
 			return null;
 		}
 
-		if (!preg_match('#(?:
-			\?[\w\\\\]+|
-			[\w\\\\]+ (?: (&[\w\\\\]+)* | (\|[\w\\\\]+)* )
-		)()$#xAD', $type)) {
+		if (!preg_match(<<<'XX'
+			~(?n)
+			(
+				\?? (?<type> [\w\\]+)|
+				(?<intersection> (?&type) (& (?&type))+  )|
+				(?<upart> (?&type) | \( (?&intersection) \) )  (\| (?&upart) )+
+			)$~xAD
+			XX, $type)) {
 			throw new Nette\InvalidArgumentException("Value '$type' is not valid type.");
 		}
 
